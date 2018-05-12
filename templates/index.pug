@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title To do list
+    link(href='styles/styles.css',rel='stylesheet')
+    meta(name='viewport',content='width=device-width,initial-scale=1')
+  body
+    .app
+      header
+        img.logo(src='images/logo.png')
+      form#task-form
+        input#task-input(type='text',placeholder='Input task here')
+        button#task-add(type='submit') submit
+      main
+        ul#task-list
+      footer
+  script(src='./js/main.js')
