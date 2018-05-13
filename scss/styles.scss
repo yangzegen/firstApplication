@@ -1,0 +1,137 @@
+$theme-color: #74a0ed;
+$theme-light: lighten( $theme-color, 25%);
+$theme-dark: darken( $theme-color, 25%);
+$font-family: arial,helvetica,sans-serif;
+
+@mixin reset {
+  margin:0;
+  padding:0;
+}
+
+@mixin list-reset{
+  @include reset;
+  list-style: none;
+}
+
+@mixin display($type){
+  display: $type;
+}
+
+@mixin flex($direction){
+  @include display(flex);
+  flex-direction: $direction;
+}
+html,body{
+  height:100vh;
+  overflow: hidden;
+}
+body{
+  @include reset;
+  font-family: $font-family;
+}
+.app{
+  height:inherit;
+}
+header{
+  @include flex(row);
+  align-items: center;
+  max-height:12vh;
+  .logo{
+    padding: 5px;
+    max-width:300px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+	  width: 50%
+  }
+}
+
+#task-form{
+  @include flex(row);
+  font-size: 1.2em;
+  max-height: 7vh;
+  input{
+    flex: 1;
+    padding:10px;
+    box-sizing: border-box;
+    border:1px solid black;
+    background-color: lighten($theme-light,5%);
+    font-size:inherit;
+  }
+  input:focus{
+    background-color: white;
+    outline: none;
+  }
+  button{
+    max-width:100px;
+    min-width:50px;
+  }
+}
+main{
+  max-height:85vh;
+  overflow-y: scroll;
+}
+#task-list{
+  @include list-reset;
+  li{
+    margin:1px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+  li[data-status='true']{
+    .task-label{
+      .task-name{
+        text-decoration: line-through;
+        color:lighten($theme-color,15%);
+      }
+    }
+    .task-container{
+      .task-buttons{
+        button[data-function='status']{
+          color:lighten($theme-color,15%);
+        }
+      }
+    }
+  }
+  .task-container{
+    @include flex(row);
+    justify-content: space-between;
+    .task-label{
+      padding:10px;
+      flex:1;
+      .task-name{
+        margin:0;
+        font-size:1.5em;
+        color:darken($theme-color,5%);
+        word-break: break-all;
+        text-transform: capitalize;
+      }
+      .task-age{
+        font-size:0.8em;
+        color: rgba(darken( $theme-color, 30%),0.5);
+        margin:2px;
+      }
+    }
+    .task-buttons{
+      width:120px;
+      @include flex(row);
+      button{
+        width:60px;
+        box-sizing: border-box;
+        padding:12px;
+        background-color: transparent;
+        color:darken($theme-color,5%);
+        font-size:1.5em;
+        border:1px solid transparent;
+        text-decoration: none;
+      }
+      button:focus{
+        outline: none;
+        background-color:lighten($theme-color,25%);
+      }
+      button[data-function='status']{
+        font-size:1em;
+      }
+    }
+  }
+}
